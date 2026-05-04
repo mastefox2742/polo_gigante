@@ -2,15 +2,16 @@ import { ReactNode } from 'react';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { logout } from '../lib/firebase';
-import { 
-  LayoutDashboard, 
-  UtensilsCrossed, 
-  Table as TableIcon, 
-  CalendarClock, 
+import {
+  LayoutDashboard,
+  UtensilsCrossed,
+  Table as TableIcon,
+  CalendarClock,
   LogOut,
   Settings,
   ChefHat,
-  Users
+  Users,
+  Star
 } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
@@ -37,6 +38,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     { to: '/admin/tables', icon: TableIcon, label: 'Tavoli' },
     { to: '/admin/reservations', icon: CalendarClock, label: 'Prenotazioni' },
     { to: '/admin/staff', icon: Users, label: 'Staff' },
+    { to: '/admin/reviews', icon: Star, label: 'Recensioni' },
   ];
 
   return (

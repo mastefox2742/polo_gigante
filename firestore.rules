@@ -65,6 +65,14 @@ service cloud.firestore {
              (data.createdAt is string || data.createdAt is timestamp);
     }
 
+    function isValidReview(data) {
+      return data.keys().hasAll(['name', 'rating', 'comment', 'createdAt']) &&
+             data.name is string && data.name.size() <= 100 &&
+             data.rating is number && data.rating >= 1 && data.rating <= 5 &&
+             data.comment is string && data.comment.size() <= 2000 &&
+             data.createdAt is string;
+    }
+
     function isValidTable(data) {
       return data.keys().hasAll(['number', 'capacity', 'isActive']) && data.keys().size() == 3 &&
              data.number is string && data.number.size() <= 10 &&
@@ -113,6 +121,12 @@ service cloud.firestore {
       allow update: if isAdmin() && isValidOrder(incoming()) && (
         incoming().diff(existing()).affectedKeys().hasOnly(['status', 'paidAt', 'items', 'totalAmount'])
       );
+      allow delete: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read, list: if true;
+      allow create: if isValidReview(incoming());
       allow delete: if isAdmin();
     }
 

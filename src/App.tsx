@@ -20,6 +20,7 @@ import AdminLogin from './pages/admin/Login';
 
 import AdminMenu from './pages/admin/Menu';
 import AdminStaff from './pages/admin/Staff';
+import AdminReviews from './pages/admin/Reviews';
 
 export default function App() {
   useEffect(() => {
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="/admin/tables" element={<AdminLayout><AdminTables /></AdminLayout>} />
           <Route path="/admin/reservations" element={<AdminLayout><AdminReservationsList /></AdminLayout>} />
           <Route path="/admin/staff" element={<AdminLayout><AdminStaff /></AdminLayout>} />
+          <Route path="/admin/reviews" element={<AdminLayout><AdminReviews /></AdminLayout>} />
 
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
