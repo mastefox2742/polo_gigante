@@ -9,11 +9,10 @@ service cloud.firestore {
 
     // --- Helpers ---
     function isSignedIn() { return request.auth != null; }
-    function isAdmin() { 
+    function isAdmin() {
       return isSignedIn() && (
-        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) || 
-        (request.auth.token.email_verified == true && exists(/databases/$(database)/documents/authorized_staff/$(request.auth.token.email))) ||
-        request.auth.token.email == 'fresneilm139@gmail.com'
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        (request.auth.token.email_verified == true && exists(/databases/$(database)/documents/authorized_staff/$(request.auth.token.email)))
       );
     }
     
