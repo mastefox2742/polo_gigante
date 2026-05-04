@@ -95,7 +95,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] pointer-events-none"
           style={{
             opacity: videoPlaying ? 0.6 : 0,

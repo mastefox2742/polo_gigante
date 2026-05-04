@@ -1,13 +1,76 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Pollo Gigante | Ristorante Italiano</title>
+
+    <!-- SEO Primary -->
+    <title>Pollo Gigante | Ristorante a Pontedera – Via Roma 11</title>
+    <meta name="description" content="Pollo Gigante, ristorante a Pontedera in Via Roma 11. Cucina senegalese e creativa, ambiente raffinato. Aperto 12:00–23:00. Prenota il tuo tavolo online." />
+    <meta name="keywords" content="ristorante pontedera, pollo gigante, cucina senegalese pontedera, ristorante via roma pontedera, ristorante africano toscana, prenotazione ristorante pontedera" />
+    <meta name="author" content="Pollo Gigante" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://polo-gigante.vercel.app/" />
+
+    <!-- Geo SEO -->
+    <meta name="geo.region" content="IT-PI" />
+    <meta name="geo.placename" content="Pontedera" />
+    <meta name="geo.position" content="43.6614;10.6333" />
+    <meta name="ICBM" content="43.6614, 10.6333" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:title" content="Pollo Gigante – Ristorante a Pontedera" />
+    <meta property="og:description" content="Cucina senegalese e creativa nel cuore di Pontedera. Via Roma 11 – Aperto 12:00–23:00." />
+    <meta property="og:url" content="https://polo-gigante.vercel.app/" />
+    <meta property="og:locale" content="it_IT" />
+
+    <!-- Preconnect per Firebase (velocità) -->
+    <link rel="preconnect" href="https://firestore.googleapis.com" />
+    <link rel="preconnect" href="https://identitytoolkit.googleapis.com" />
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+
+    <!-- JSON-LD Structured Data (Google rich results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Pollo Gigante",
+      "description": "Ristorante di cucina senegalese e creativa nel cuore di Pontedera.",
+      "url": "https://polo-gigante.vercel.app",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Roma 11",
+        "addressLocality": "Pontedera",
+        "addressRegion": "PI",
+        "postalCode": "56025",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.6614,
+        "longitude": 10.6333
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "12:00",
+          "closes": "23:00"
+        }
+      ],
+      "servesCuisine": ["Senegalese", "Africana", "Creativa"],
+      "priceRange": "€€",
+      "foundingDate": "1994",
+      "hasMap": "https://www.google.com/maps/search/Pollo+Gigante+Pontedera+Via+Roma+11",
+      "sameAs": [
+        "https://www.google.com/maps/search/Pollo+Gigante+Pontedera"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
