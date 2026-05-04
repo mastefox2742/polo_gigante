@@ -1,0 +1,122 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // --- 0. Global Safety Net ---
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { 
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) || 
+        (request.auth.token.email_verified == true && exists(/databases/$(database)/documents/authorized_staff/$(request.auth.token.email))) ||
+        request.auth.token.email == 'foxdev51@gmail.com'
+      );
+    }
+    
+    function isValidId(id) { 
+      return id is string && id.size() <= 128; 
+    }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    // --- Validation Blueprints ---
+
+    function isValidStaff(data) {
+      return data.keys().hasAll(['email', 'role', 'addedAt']) && data.keys().size() == 3 &&
+             data.email is string && data.email.size() <= 128 &&
+             data.role in ['admin', 'staff'] &&
+             data.addedAt is string && data.addedAt.size() <= 100;
+    }
+
+    function isValidMenuItem(data) {
+      let isBasicValid = data.keys().hasAll(['name', 'price', 'category', 'isActive']) &&
+             data.name is string && data.name.size() <= 100 &&
+             data.price is number && data.price >= 0 &&
+             data.category in ['Antipasti', 'Primi', 'Secondi', 'Dolci', 'Bevande'] &&
+             data.isActive is bool;
+      let hasValidDesc = (!('description' in data) || (data.description is string && data.description.size() <= 1000));
+      let hasValidImg = (!('image' in data) || (data.image is string && data.image.size() <= 2097152));
+      return isBasicValid && hasValidDesc && hasValidImg;
+    }
+
+    function isValidReservation(data) {
+      return data.keys().hasAll(['customerName', 'email', 'phone', 'guests', 'date', 'status', 'createdAt']) && 
+             data.keys().size() == 7 &&
+             data.customerName is string && data.customerName.size() <= 100 &&
+             data.email is string && data.email.size() <= 150 &&
+             data.phone is string && data.phone.size() <= 20 &&
+             data.guests is number && data.guests >= 1 && data.guests <= 50 &&
+             data.date is string && data.date.size() <= 50 &&
+             data.status in ['pending', 'confirmed', 'cancelled'] &&
+             data.createdAt is string && data.createdAt.size() <= 100;
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['tableId', 'items', 'totalAmount', 'status', 'createdAt']) &&
+             data.tableId is string && data.tableId.size() <= 128 &&
+             data.items is list && data.items.size() <= 50 &&
+             data.totalAmount is number && data.totalAmount >= 0 &&
+             data.status in ['pending', 'paid'] &&
+             (data.createdAt is string || data.createdAt is timestamp);
+    }
+
+    function isValidTable(data) {
+      return data.keys().hasAll(['number', 'capacity', 'isActive']) && data.keys().size() == 3 &&
+             data.number is string && data.number.size() <= 10 &&
+             data.capacity is number && data.capacity >= 1 && data.capacity <= 100 &&
+             data.isActive is bool;
+    }
+
+    // --- Collection Rules ---
+
+    match /admins/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if isAdmin();
+    }
+
+    match /authorized_staff/{email} {
+      allow read, list: if isAdmin();
+      allow write: if isAdmin() && isValidStaff(incoming());
+    }
+
+    match /menuItems/{itemId} {
+      allow read, list: if true;
+      allow create: if isAdmin() && isValidMenuItem(incoming());
+      allow update: if isAdmin() && isValidMenuItem(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['name', 'price', 'category', 'description', 'image', 'isActive'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    match /reservations/{reservationId} {
+      allow create: if isValidReservation(incoming()); // Public access for customers
+      // Ensure admin updates remain valid
+      allow update: if isAdmin() && isValidReservation(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['status'])
+      );
+      allow read, list, delete: if isAdmin();
+    }
+
+    match /tables/{tableId} {
+      allow read, list: if true;
+      allow write: if isAdmin() && isValidTable(incoming());
+    }
+
+    match /orders/{orderId} {
+      allow read, list: if isAdmin();
+      allow create: if isAdmin() && isValidOrder(incoming());
+      allow update: if isAdmin() && isValidOrder(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['status', 'paidAt', 'items', 'totalAmount'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}
