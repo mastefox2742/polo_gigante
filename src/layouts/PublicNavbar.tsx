@@ -30,7 +30,7 @@ export default function PublicNavbar() {
         </div>
         
         <Link to="/" className={logoClass}>
-          Polo Gigante
+          Pollo Gigante
         </Link>
         
         <div className="hidden md:flex items-center space-x-12">

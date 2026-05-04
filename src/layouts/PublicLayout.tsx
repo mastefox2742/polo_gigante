@@ -79,7 +79,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
         {/* Fallback : image affichée si la vidéo est bloquée (iOS) ou en cours de chargement */}
         <img
           src="/IMG-20260428-WA0128.jpg"
-          alt="Ambiance Polo Gigante"
+          alt="Ambiance Pollo Gigante"
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] pointer-events-none"
           style={{
             opacity: videoPlaying ? 0 : 0.6,
@@ -116,7 +116,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
         <div className="max-w-7xl mx-auto px-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
             <div className="flex flex-col gap-1">
-              <h2 className="font-serif text-2xl text-ink font-light italic">Polo Gigante</h2>
+              <h2 className="font-serif text-2xl text-ink font-light italic">Pollo Gigante</h2>
               <p className="text-[8px] uppercase tracking-[0.3em] font-medium text-ink/40">Pontedera • Via Roma 11 • Est. 1994</p>
             </div>
 
@@ -129,7 +129,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
 
             <div className="flex flex-col items-center md:items-end gap-1 text-[8px] uppercase tracking-[0.3em] text-ink/30">
               <p>
-                <Link to="/admin/login" className="hover:text-ink transition-colors">©</Link> 2024 Polo Gigante
+                <Link to="/admin/login" className="hover:text-ink transition-colors">©</Link> 2024 Pollo Gigante
               </p>
               <p className="tracking-[0.5em] font-bold text-ink/20">PUER DEI</p>
               <span className="text-bordeaux font-bold pt-1">12:00 - 23:00</span>

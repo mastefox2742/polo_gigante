@@ -35,7 +35,7 @@ export default function AdminLogin() {
         animate={{ opacity: 1, y: 0 }}
         className="max-w-md w-full bg-white/5 backdrop-blur-xl p-12 border border-white/10 text-center"
       >
-        <h1 className="font-serif text-4xl text-white mb-4 italic">Polo Gigante</h1>
+        <h1 className="font-serif text-4xl text-white mb-4 italic">Pollo Gigante</h1>
         <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold mb-12">Gestione Ristorante • Accesso Riservato</p>
         
         <form onSubmit={handleEmailLogin} className="flex flex-col space-y-4 mb-8">

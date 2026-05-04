@@ -34,7 +34,7 @@ export default function MenuPage() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8 border-b border-ink/5 pb-10">
           <div>
             <h2 className="font-serif text-5xl text-bordeaux font-light">Il Menu</h2>
-            <p className="text-[10px] uppercase tracking-widest opacity-40 mt-2 font-bold">Selezione Gastronomica • Polo Gigante</p>
+            <p className="text-[10px] uppercase tracking-widest opacity-40 mt-2 font-bold">Selezione Gastronomica • Pollo Gigante</p>
           </div>
           <div className="flex flex-wrap gap-8 justify-center">
             {CATEGORIES.map((cat) => (

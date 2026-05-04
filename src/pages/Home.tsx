@@ -44,7 +44,7 @@ export default function Home() {
             transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }}
           >
             <h1 className="text-white font-serif text-8xl md:text-9xl mb-4 font-light tracking-tight">
-              Polo Gigante
+              Pollo Gigante
             </h1>
             <p className="text-white/80 italic serif text-2xl tracking-wide mb-12">Sapori del Senegal e Cucina Creativa</p>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
@@ -71,7 +71,7 @@ export default function Home() {
             Un viaggio di sapori tra tradizione e creatività.
           </h3>
           <p className="text-ink/60 leading-relaxed font-normal text-xl max-w-2xl mx-auto">
-            Situato nel cuore di Pontedera in Via Roma 11, Polo Gigante è un ode ai sapori autentici, 
+            Situato nel cuore di Pontedera in Via Roma 11, Pollo Gigante è un ode ai sapori autentici, 
             dove ogni piatto racconta una storia di passione e convivialità.
           </p>
         </div>

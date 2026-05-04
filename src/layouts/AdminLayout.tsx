@@ -44,7 +44,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       {/* Sidebar */}
       <aside className="w-64 bg-ink text-white p-8 flex flex-col fixed h-full top-0 left-0 z-50">
         <div className="mb-12">
-          <h2 className="font-serif text-2xl mb-1 italic">Polo Gigante</h2>
+          <h2 className="font-serif text-2xl mb-1 italic">Pollo Gigante</h2>
           <p className="text-[9px] uppercase tracking-widest text-white/30 font-bold">Area Amministrazione</p>
         </div>
 
