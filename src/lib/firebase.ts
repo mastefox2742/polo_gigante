@@ -3,17 +3,17 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailA
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  };
+  apiKey: "AIzaSyAXwY6mV3tbSHTkSxBc2qYIM9tdO0DdeIg",
+  authDomain: "gen-lang-client-0134911062.firebaseapp.com",
+  projectId: "gen-lang-client-0134911062",
+  storageBucket: "gen-lang-client-0134911062.firebasestorage.app",
+  messagingSenderId: "732694150294",
+  appId: "1:732694150294:web:ee547c09438f2613a156b7",
+};
 
 const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app, import.meta.env.VITE_FIREBASE_DATABASE_ID);
+export const db = getFirestore(app, "ai-studio-00cbe5b1-a121-41b4-b4d0-c40153d7cd32");
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
