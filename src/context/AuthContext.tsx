@@ -20,7 +20,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
-        const isDefaultAdmin = user.email === 'foxdev51@gmail.com';
+        const isDefaultAdmin = user.email === import.meta.env.VITE_ADMIN_EMAIL || user.email === 'fresneilm139@gmail.com';
         if (isDefaultAdmin) {
           setIsAdmin(true);
         } else {

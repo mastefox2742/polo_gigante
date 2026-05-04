@@ -27,6 +27,7 @@ export default function ReservationPage() {
         phone: formData.phone,
         guests: Number(formData.guests),
         date: formData.date,
+        notes: formData.notes || '',
         status: 'pending',
         createdAt: new Date().toISOString()
       });

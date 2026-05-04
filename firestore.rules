@@ -13,7 +13,7 @@ service cloud.firestore {
       return isSignedIn() && (
         exists(/databases/$(database)/documents/admins/$(request.auth.uid)) || 
         (request.auth.token.email_verified == true && exists(/databases/$(database)/documents/authorized_staff/$(request.auth.token.email))) ||
-        request.auth.token.email == 'foxdev51@gmail.com'
+        request.auth.token.email == 'fresneilm139@gmail.com'
       );
     }
     
@@ -44,15 +44,16 @@ service cloud.firestore {
     }
 
     function isValidReservation(data) {
-      return data.keys().hasAll(['customerName', 'email', 'phone', 'guests', 'date', 'status', 'createdAt']) && 
-             data.keys().size() == 7 &&
+      let hasValidNotes = (!('notes' in data) || (data.notes is string && data.notes.size() <= 500));
+      return data.keys().hasAll(['customerName', 'email', 'phone', 'guests', 'date', 'status', 'createdAt']) &&
              data.customerName is string && data.customerName.size() <= 100 &&
              data.email is string && data.email.size() <= 150 &&
              data.phone is string && data.phone.size() <= 20 &&
              data.guests is number && data.guests >= 1 && data.guests <= 50 &&
              data.date is string && data.date.size() <= 50 &&
              data.status in ['pending', 'confirmed', 'cancelled'] &&
-             data.createdAt is string && data.createdAt.size() <= 100;
+             data.createdAt is string && data.createdAt.size() <= 100 &&
+             hasValidNotes;
     }
 
     function isValidOrder(data) {
