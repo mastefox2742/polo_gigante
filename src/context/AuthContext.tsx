@@ -20,16 +20,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
-        try {
-          const adminDoc = await getDoc(doc(db, 'admins', user.uid));
-          let isAuth = adminDoc.exists();
-          if (!isAuth && user.email) {
-            const staffDoc = await getDoc(doc(db, 'authorized_staff', user.email));
-            isAuth = staffDoc.exists();
+        const OWNER_UID = 'DkSxk4pMxIVekGylywewK8ihzP12';
+        if (user.uid === OWNER_UID) {
+          setIsAdmin(true);
+        } else {
+          try {
+            const adminDoc = await getDoc(doc(db, 'admins', user.uid));
+            let isAuth = adminDoc.exists();
+            if (!isAuth && user.email) {
+              const staffDoc = await getDoc(doc(db, 'authorized_staff', user.email));
+              isAuth = staffDoc.exists();
+            }
+            setIsAdmin(isAuth);
+          } catch {
+            setIsAdmin(false);
           }
-          setIsAdmin(isAuth);
-        } catch {
-          setIsAdmin(false);
         }
       } else {
         setIsAdmin(false);
