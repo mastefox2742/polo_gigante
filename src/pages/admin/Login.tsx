@@ -1,9 +1,9 @@
-import { loginWithGoogle, loginWithEmail } from '../../lib/firebase';
+import { loginWithGoogle, loginWithEmail, getRedirectResult, auth } from '../../lib/firebase';
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { LogIn, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function AdminLogin() {
   const { user, isAdmin, loading } = useAuth();
@@ -11,6 +11,10 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getRedirectResult(auth).catch(() => {});
+  }, []);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();

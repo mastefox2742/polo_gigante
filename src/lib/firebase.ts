@@ -1,5 +1,9 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth, GoogleAuthProvider,
+  signInWithPopup, signInWithRedirect, getRedirectResult,
+  signOut, signInWithEmailAndPassword
+} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -17,6 +21,11 @@ export const db = getFirestore(app, "ai-studio-00cbe5b1-a121-41b4-b4d0-c40153d7c
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
-export const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
+const isMobile = /Mobi|Android|iPad|Tablet/i.test(navigator.userAgent);
+
+export const loginWithGoogle = () =>
+  isMobile ? signInWithRedirect(auth, googleProvider) : signInWithPopup(auth, googleProvider);
+
+export { getRedirectResult };
 export const loginWithEmail = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
 export const logout = () => signOut(auth);
