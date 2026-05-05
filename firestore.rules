@@ -87,7 +87,8 @@ service cloud.firestore {
     }
 
     match /authorized_staff/{email} {
-      allow read, list: if isAdmin();
+      allow read: if isSignedIn() && request.auth.token.email == email;
+      allow list: if isAdmin();
       allow write: if isAdmin() && isValidStaff(incoming());
     }
 
