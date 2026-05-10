@@ -29,9 +29,9 @@ export default function MenuPage() {
   }, []);
 
   return (
-    <div className="py-60 bg-white/95 min-h-screen my-20 border-y border-white/10">
-      <div className="max-w-7xl mx-auto px-6 bg-white p-12 border border-white/20 shadow-2xl">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8 border-b border-ink/5 pb-10">
+    <div className="py-16 bg-white/95 min-h-screen my-6 border-y border-white/10">
+      <div className="max-w-7xl mx-auto px-6 bg-white p-8 border border-white/20 shadow-2xl">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-8 border-b border-ink/5 pb-8">
           <div>
             <h2 className="font-serif text-5xl text-bordeaux font-light">Il Menu</h2>
             <p className="text-[10px] uppercase tracking-widest opacity-40 mt-2 font-bold">Selezione Gastronomica • Pollo Gigante</p>

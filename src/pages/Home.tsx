@@ -101,10 +101,10 @@ export default function Home() {
       </section>
 
       {/* Intro Section */}
-      <section className="py-60 px-6 bg-[#FDFDF7]/95 border-y border-ink/5 my-20">
+      <section className="py-20 px-6 bg-[#FDFDF7]/95 border-y border-ink/5 my-6">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="text-bordeaux text-[10px] uppercase tracking-[0.4em] font-bold mb-12 block">Est. 1994 • Pontedera</span>
-          <h3 className="font-serif text-4xl md:text-6xl text-ink leading-[1.1] mb-12 font-light italic">
+          <span className="text-bordeaux text-[10px] uppercase tracking-[0.4em] font-bold mb-6 block">Est. 1994 • Pontedera</span>
+          <h3 className="font-serif text-4xl md:text-6xl text-ink leading-[1.1] mb-6 font-light italic">
             Un viaggio di sapori tra tradizione e creatività.
           </h3>
           <p className="text-ink/60 leading-relaxed font-normal text-xl max-w-2xl mx-auto">
@@ -116,9 +116,9 @@ export default function Home() {
 
       {/* Featured Dishes Section */}
       {featuredItems.length > 0 && (
-        <section className="py-40 bg-white/95 mb-20 border-y border-ink/5">
+        <section className="py-16 bg-white/95 mb-6 border-y border-ink/5">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-20">
+            <div className="text-center mb-10">
               <h2 className="font-serif text-5xl text-ink font-light italic">I Nostri Classici</h2>
               <div className="w-20 h-px bg-bordeaux mx-auto mt-6"></div>
             </div>
@@ -147,7 +147,7 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="mt-20 text-center">
+            <div className="mt-10 text-center">
               <Link to="/menu" className="text-[10px] uppercase tracking-[0.4em] font-bold text-ink border-b border-ink/20 pb-2 hover:text-bordeaux hover:border-bordeaux transition-all">
                 Consulta il Menu completo
               </Link>
@@ -156,9 +156,9 @@ export default function Home() {
         </section>
       )}
       {/* Reviews Section */}
-      <section className="py-40 px-6 bg-ink my-20">
+      <section className="py-16 px-6 bg-ink my-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20">
+          <div className="text-center mb-10">
             <span className="text-bordeaux text-[10px] uppercase tracking-[0.4em] font-bold mb-4 block">Cosa dicono di noi</span>
             <h2 className="font-serif text-5xl text-white font-light italic">Recensioni</h2>
             <div className="w-20 h-px bg-bordeaux mx-auto mt-6" />

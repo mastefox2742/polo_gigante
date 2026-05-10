@@ -64,9 +64,9 @@ export default function ReservationPage() {
   }
 
   return (
-    <div className="py-60 px-6 bg-white/95 min-h-screen my-20 border-y border-white/10">
-      <div className="max-w-2xl mx-auto bg-white p-12 border border-white/20 shadow-2xl">
-        <div className="text-center mb-20">
+    <div className="py-16 px-6 bg-white/95 min-h-screen my-6 border-y border-white/10">
+      <div className="max-w-2xl mx-auto bg-white p-8 border border-white/20 shadow-2xl">
+        <div className="text-center mb-10">
           <span className="text-bordeaux text-[10px] uppercase tracking-[0.4em] font-bold mb-6 block">Prenotazioni</span>
           <h1 className="font-serif text-5xl md:text-7xl text-ink mb-8 font-light italic">Prenota il tuo Tavolo</h1>
           <p className="text-ink/50 text-lg font-light">
@@ -74,33 +74,33 @@ export default function ReservationPage() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white p-12 shadow-2xl border border-ink/5 space-y-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="bg-white p-8 shadow-2xl border border-ink/5 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-3">
               <label className="text-[10px] text-ink/40 uppercase tracking-widest font-bold">Nome Completo</label>
-              <input 
+              <input
                 required
-                type="text" 
+                type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full bg-transparent border-b border-ink/10 text-ink pb-3 text-sm focus:outline-none focus:border-bordeaux transition-colors" 
-                placeholder="Marco Rossi" 
+                className="w-full bg-transparent border-b border-ink/10 text-ink pb-3 text-sm focus:outline-none focus:border-bordeaux transition-colors"
+                placeholder="Marco Rossi"
               />
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3">
               <label className="text-[10px] text-ink/40 uppercase tracking-widest font-bold">Ospiti</label>
-              <input 
+              <input
                 required
-                type="number" 
+                type="number"
                 min="1"
                 max="20"
                 value={formData.guests}
                 onChange={(e) => setFormData({...formData, guests: Number(e.target.value)})}
-                className="w-full bg-transparent border-b border-ink/10 text-ink pb-3 text-sm focus:outline-none focus:border-bordeaux transition-colors" 
+                className="w-full bg-transparent border-b border-ink/10 text-ink pb-3 text-sm focus:outline-none focus:border-bordeaux transition-colors"
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <label className="text-[10px] text-ink/40 uppercase tracking-widest font-bold">Email</label>
               <input 
