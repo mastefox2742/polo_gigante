@@ -101,7 +101,7 @@ export default function Home() {
       </section>
 
       {/* Intro Section */}
-      <section className="py-20 px-6 bg-[#FDFDF7]/95 border-y border-ink/5 my-6">
+      <section className="py-12 px-6 bg-[#FDFDF7]/95 border-y border-ink/5 my-2">
         <div className="max-w-4xl mx-auto text-center">
           <span className="text-bordeaux text-[10px] uppercase tracking-[0.4em] font-bold mb-6 block">Est. 1994 • Pontedera</span>
           <h3 className="font-serif text-4xl md:text-6xl text-ink leading-[1.1] mb-6 font-light italic">
@@ -116,7 +116,7 @@ export default function Home() {
 
       {/* Featured Dishes Section */}
       {featuredItems.length > 0 && (
-        <section className="py-16 bg-white/95 mb-6 border-y border-ink/5">
+        <section className="py-12 bg-white/95 mb-2 border-y border-ink/5">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-10">
               <h2 className="font-serif text-5xl text-ink font-light italic">I Nostri Classici</h2>
@@ -156,7 +156,7 @@ export default function Home() {
         </section>
       )}
       {/* Reviews Section */}
-      <section className="py-16 px-6 bg-ink my-6">
+      <section className="py-12 px-6 bg-ink my-2">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <span className="text-bordeaux text-[10px] uppercase tracking-[0.4em] font-bold mb-4 block">Cosa dicono di noi</span>
