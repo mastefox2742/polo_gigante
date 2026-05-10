@@ -8,7 +8,7 @@ import { Plus } from 'lucide-react';
 const CATEGORIES = ['Antipasti', 'Primi', 'Secondi', 'Dolci', 'Bevande'] as const;
 
 export default function MenuPage() {
-  const [activeCategory, setActiveCategory] = useState<typeof CATEGORIES[number]>('Antipasti');
+  const [activeCategory, setActiveCategory] = useState<typeof CATEGORIES[number] | null>(null);
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,13 +37,23 @@ export default function MenuPage() {
             <p className="text-[10px] uppercase tracking-widest opacity-40 mt-2 font-bold">Selezione Gastronomica • Pollo Gigante</p>
           </div>
           <div className="flex flex-wrap gap-8 justify-center">
+            <button
+              onClick={() => setActiveCategory(null)}
+              className={`text-[10px] uppercase tracking-[0.3em] py-2 whitespace-nowrap transition-all ${
+                activeCategory === null
+                ? 'text-bordeaux font-bold border-b border-bordeaux'
+                : 'text-ink/30 border-b border-transparent hover:text-ink'
+              }`}
+            >
+              Tutti
+            </button>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`text-[10px] uppercase tracking-[0.3em] py-2 whitespace-nowrap transition-all ${
-                  activeCategory === cat 
-                  ? 'text-bordeaux font-bold border-b border-bordeaux' 
+                  activeCategory === cat
+                  ? 'text-bordeaux font-bold border-b border-bordeaux'
                   : 'text-ink/30 border-b border-transparent hover:text-ink'
                 }`}
               >
@@ -65,7 +75,7 @@ export default function MenuPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
             <AnimatePresence mode="wait">
-              {items.filter(item => item.category === activeCategory).map((item) => (
+              {(activeCategory === null ? items : items.filter(item => item.category === activeCategory)).map((item) => (
                 <motion.div
                   key={item.id}
                   initial={{ opacity: 0, y: 20 }}
