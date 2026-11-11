@@ -1,26 +1,292 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =========================================================
+   POLLO GIGANTE — Design System
+   Sénégal × Italie : chaleur, or, terre, élégance
+   ========================================================= */
+
+@theme {
+  /* Fonts */
+  --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  /* Couleurs de marque */
+  --color-cream: #f7f1e6;
+  --color-sand: #ece0cc;
+  --color-ink: #19120b;
+  --color-charcoal: #271d12;
+  --color-espresso: #12100c;
+
+  --color-gold: #c89a3c;
+  --color-gold-soft: #d8b35e;
+  --color-gold-bright: #e9c877;
+
+  --color-terracotta: #b24a2e;
+  --color-terracotta-soft: #c96a4c;
+  --color-forest: #2f5138;
+
+  --color-muted: #7a6c56;
+  --color-line: #e4d7c1;
+
+  /* Rayons & ombres */
+  --radius-xl2: 1.75rem;
+  --shadow-soft: 0 18px 50px -24px rgba(25, 18, 11, 0.45);
+  --shadow-card: 0 24px 60px -30px rgba(25, 18, 11, 0.55);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ============================= Base ============================= */
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-espresso);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-sand);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 999px;
+  border: 3px solid var(--color-sand);
+}
+
+/* ============================= Utilitaires ============================= */
+
+/* Petit label en majuscules doré */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.eyebrow-center::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+/* Fond dégradé chaleureux (pour sections sombres) */
+.bg-warm-dark {
+  background:
+    radial-gradient(120% 120% at 15% 10%, rgba(200, 154, 60, 0.14), transparent 55%),
+    radial-gradient(90% 90% at 90% 90%, rgba(178, 74, 46, 0.16), transparent 50%),
+    var(--color-espresso);
+}
+
+/* Image avec dégradé par-dessus (fallback couleur si l'image ne charge pas) */
+.img-cover {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--color-charcoal);
+}
+
+/* Bouton principal */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease,
+    color 0.25s ease;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--color-gold-bright), var(--color-gold));
+  color: var(--color-espresso);
+  box-shadow: 0 14px 30px -14px rgba(200, 154, 60, 0.8);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -14px rgba(200, 154, 60, 0.9);
+}
+.btn-outline {
+  background: transparent;
+  color: currentColor;
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.btn-outline:hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  transform: translateY(-2px);
+}
+.btn-dark {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+.btn-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Carte */
+.card {
+  background: #fffaf1;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl2);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Lien soulignement animé */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s ease;
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Reveal au scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Séparateur décoratif */
+.divider-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-gold);
+}
+.divider-dot::before,
+.divider-dot::after {
+  content: "";
+  width: 46px;
+  height: 1px;
+  background: color-mix(in srgb, var(--color-gold) 60%, transparent);
+}
+
+/* Container de section */
+.wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Grain / texture légère */
+.texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 4px 4px;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
