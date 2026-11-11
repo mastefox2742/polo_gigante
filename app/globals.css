@@ -280,7 +280,208 @@ h1, h2, h3, h4 {
   opacity: 0.4;
 }
 
+/* ============================= Hero (style Ristorante) ============================= */
+
+/* Fond lin / papier ivoire, très légèrement texturé */
+.hero-linen {
+  background-color: #f8f4ec;
+  background-image:
+    radial-gradient(120% 80% at 50% 40%, rgba(255, 255, 255, 0.85), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(120, 100, 70, 0.025) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(120, 100, 70, 0.02) 0 1px, transparent 1px 4px);
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: clamp(0.72rem, 1.1vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.hero-title {
+  margin-top: 1.6rem;
+  font-family: var(--font-jost), sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 7.4vw, 6.4rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+.hero-title-accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-terracotta);
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2.2rem;
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero-cta:hover {
+  background: var(--color-terracotta);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -16px rgba(178, 74, 46, 0.7);
+}
+
+/* Entrée en fondu */
+.hero-in {
+  animation: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Assiettes : rond, bord blanc façon porcelaine, ombre douce, rotation lente */
+.hero-plate {
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  padding: clamp(8px, 1.1vw, 16px);
+  background: radial-gradient(circle at 35% 30%, #ffffff, #f1ece4 70%, #e4dccf);
+  box-shadow:
+    0 40px 70px -30px rgba(40, 28, 15, 0.45),
+    0 10px 20px -12px rgba(40, 28, 15, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+  animation: plate-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-plate-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: #e9e1d4;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06), inset 0 6px 18px rgba(0, 0, 0, 0.18);
+  animation: plate-spin 90s linear infinite;
+}
+.hero-plate-tl {
+  width: clamp(220px, 30vw, 470px);
+  aspect-ratio: 1;
+  top: clamp(64px, 6vw, 84px);
+  left: clamp(-170px, -9vw, -70px);
+  --from: -30deg;
+}
+.hero-plate-br {
+  width: clamp(220px, 32vw, 500px);
+  aspect-ratio: 1;
+  bottom: clamp(-150px, -7vw, -60px);
+  right: clamp(-150px, -8vw, -60px);
+  --from: 30deg;
+  animation-delay: 0.15s;
+}
+.hero-plate-br .hero-plate-inner {
+  animation-direction: reverse;
+}
+
+@keyframes plate-in {
+  from {
+    opacity: 0;
+    transform: rotate(var(--from)) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+@keyframes plate-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Carte du menu en papier, inclinée, qui dépasse du bas */
+.hero-menu-card {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 0;
+  width: min(560px, 86vw);
+  transform: translate(-58%, 38%) rotate(-5deg);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-menu-card:hover {
+  transform: translate(-58%, 28%) rotate(-3deg);
+}
+.hero-menu-card-inner {
+  padding: 1.8rem 2rem 2.4rem;
+  background-color: #fdfbf6;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(120, 100, 70, 0.03) 0 1px,
+    transparent 1px 3px
+  );
+  border-radius: 4px;
+  outline: 1px dashed #d6ccbb;
+  outline-offset: -10px;
+  box-shadow:
+    0 30px 60px -25px rgba(40, 28, 15, 0.35),
+    0 2px 6px rgba(40, 28, 15, 0.08);
+  animation: card-in 1.3s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(45%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    gap: 0.6rem;
+  }
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    width: 18px;
+  }
+  .hero-plate-tl {
+    width: 190px;
+    top: 72px;
+    left: -78px;
+  }
+  .hero-plate-br {
+    width: 200px;
+    right: -80px;
+    bottom: 40px;
+  }
+  .hero-menu-card {
+    transform: translate(-50%, 55%) rotate(-4deg);
+  }
+  .hero-menu-card:hover {
+    transform: translate(-50%, 48%) rotate(-3deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-plate-inner {
+    animation: none;
+  }
   .reveal {
     opacity: 1;
     transform: none;

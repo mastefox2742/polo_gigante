@@ -12,8 +12,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // Hero sombre uniquement sur l'accueil → nav claire au-dessus
-  const overHero = pathname === "/" && !scrolled;
+  // Accueil : hero clair → nav sombre. Pages internes : en-tête photo sombre → nav claire.
+  const overHero = pathname !== "/" && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);

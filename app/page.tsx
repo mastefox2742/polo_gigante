@@ -75,7 +75,7 @@ export default function HomePage() {
 
       {/* Piliers */}
       <section className="bg-cream">
-        <div className="wrap -mt-10 grid gap-5 md:grid-cols-3">
+        <div className="wrap grid gap-5 pt-16 md:grid-cols-3">
           {piliers.map((p, i) => (
             <Reveal key={p.title} delay={i * 120}>
               <div className="card flex items-start gap-4 p-6">
