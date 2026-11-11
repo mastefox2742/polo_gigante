@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import { randomUUID } from "node:crypto";
 
 // Stockage simple des réservations dans un fichier JSON local.
@@ -24,12 +25,28 @@ export type Reservation = ReservationInput & {
   status: "pending";
 };
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const FILE = path.join(DATA_DIR, "reservations.json");
+// En local on écrit dans ./data. En production (Vercel) le dossier du projet
+// est en lecture seule : on se rabat alors sur le dossier temporaire (/tmp)
+// pour ne jamais renvoyer d'erreur au visiteur. ATTENTION : ce stockage de
+// secours n'est pas durable → branche une vraie base de données pour la prod.
+const PRIMARY_DIR = path.join(process.cwd(), "data");
+const FALLBACK_DIR = path.join(os.tmpdir(), "pollo-gigante");
 
-async function readAll(): Promise<Reservation[]> {
+async function writableFile(): Promise<string> {
+  for (const dir of [PRIMARY_DIR, FALLBACK_DIR]) {
+    try {
+      await fs.mkdir(dir, { recursive: true });
+      return path.join(dir, "reservations.json");
+    } catch {
+      // on essaie le dossier suivant
+    }
+  }
+  return path.join(FALLBACK_DIR, "reservations.json");
+}
+
+async function readAll(file: string): Promise<Reservation[]> {
   try {
-    const raw = await fs.readFile(FILE, "utf8");
+    const raw = await fs.readFile(file, "utf8");
     return JSON.parse(raw) as Reservation[];
   } catch {
     return [];
@@ -45,15 +62,17 @@ export async function saveReservation(
     createdAt: new Date().toISOString(),
     status: "pending",
   };
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  const all = await readAll();
+  const file = await writableFile();
+  const all = await readAll(file);
   all.push(reservation);
-  await fs.writeFile(FILE, JSON.stringify(all, null, 2), "utf8");
+  // Log serveur : visible dans les logs Vercel même sans base de données.
+  console.log("Nouvelle réservation:", JSON.stringify(reservation));
+  await fs.writeFile(file, JSON.stringify(all, null, 2), "utf8");
   return reservation;
 }
 
 export async function getReservations(): Promise<Reservation[]> {
-  return readAll();
+  return readAll(await writableFile());
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
