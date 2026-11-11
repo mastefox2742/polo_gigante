@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { unsplash } from "@/lib/images";
-import { menu } from "@/lib/menu";
-import { formatPrice } from "@/lib/format";
 import { IconStar } from "./Icons";
 
 // Assiettes vues du dessus (remplace par tes propres photos détourées si besoin)
@@ -28,9 +26,12 @@ export default function Hero() {
       </div>
 
       {/* Contenu centré */}
-      <div className="relative z-10 flex w-full max-w-4xl flex-1 flex-col items-center justify-center px-5 pb-56 pt-[17rem] text-center sm:pt-32 font-[family-name:var(--font-jost)] text-ink md:pb-64">
+      <div className="relative z-10 flex w-full max-w-4xl flex-1 flex-col items-center justify-center px-5 pb-40 pt-[17rem] text-center sm:pb-28 sm:pt-28 font-[family-name:var(--font-jost)] text-ink">
         <p className="hero-eyebrow hero-in" style={{ animationDelay: "0.1s" }}>
-          Restaurant sénégalais · Cuisine italienne
+          <span className="sm:hidden">Sénégal · Italie</span>
+          <span className="hidden sm:inline">
+            Restaurant sénégalais · Cuisine italienne
+          </span>
         </p>
 
         <h1 className="hero-title hero-in" style={{ animationDelay: "0.25s" }}>
@@ -73,35 +74,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Carte du menu inclinée qui dépasse en bas */}
-      <Link
-        href="/menu"
-        className="hero-menu-card group"
-        aria-label="Voir notre menu"
-      >
-        <div className="hero-menu-card-inner font-[family-name:var(--font-jost)]">
-          <p className="text-center text-[clamp(1.6rem,3vw,2.3rem)] font-medium uppercase tracking-[0.08em] text-ink">
-            Notre Menu
-          </p>
-          <div className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1 border-y border-dashed border-[#cbbfa9] py-3 text-[0.8rem] text-[#5d554c]">
-            {menu.map((c) => (
-              <span key={c.id}>{c.title}</span>
-            ))}
-          </div>
-          <p className="mt-5 text-center text-[1.15rem] font-medium uppercase tracking-[0.12em] text-ink">
-            {menu[1].title}
-          </p>
-          <ul className="mx-auto mt-3 max-w-sm space-y-2 text-[0.85rem] text-[#5d554c]">
-            {menu[1].dishes.slice(0, 3).map((d) => (
-              <li key={d.name} className="flex items-baseline gap-2">
-                <span>{d.name}</span>
-                <span className="flex-1 border-b border-dotted border-[#cbbfa9]" />
-                <span className="text-ink">{formatPrice(d.price)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Link>
     </section>
   );
 }
